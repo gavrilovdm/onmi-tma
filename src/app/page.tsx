@@ -1,7 +1,7 @@
 "use client";
 
 import { Container, Title, Text, Button, Stack, Group } from '@mantine/core';
-import { useTelegram } from '../providers/TelegramProvider';
+import { useTelegram } from '@/components/providers/telegram-provider';
 
 export default function Home() {
   const { webApp, ready } = useTelegram();
@@ -20,11 +20,21 @@ export default function Home() {
         <Text>This is a Telegram Mini App template built with Next.js and Mantine UI.</Text>
         
         <Group>
-          <Button onClick={handleMainButton} variant="filled" color="blue">
+          <Button 
+            onClick={handleMainButton} 
+            variant="filled" 
+            color="blue"
+            disabled={!ready}
+          >
             Show Main Button
           </Button>
           
-          <Button onClick={() => webApp?.close()} variant="light" color="red">
+          <Button 
+            onClick={() => webApp?.close()} 
+            variant="light" 
+            color="red"
+            disabled={!ready}
+          >
             Close App
           </Button>
         </Group>

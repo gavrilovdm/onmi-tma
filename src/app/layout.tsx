@@ -1,6 +1,15 @@
 import '@mantine/core/styles.css';
-import { MantineProvider, ColorSchemeScript } from '@mantine/core';
-import { TelegramProvider } from '../providers/TelegramProvider';
+import { ColorSchemeScript } from '@mantine/core';
+import { TelegramProvider } from '@/components/providers/telegram-provider';
+import { MantineProvider } from '@/components/providers/mantine-provider';
+import { Viewport } from 'next';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1.0,
+  maximumScale: 1.0,
+  userScalable: false,
+};
 
 export const metadata = {
   title: 'Telegram Mini App',
@@ -13,12 +22,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <ColorSchemeScript />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <TelegramProvider>
           <MantineProvider>
             {children}
