@@ -1,9 +1,10 @@
 "use client";
 
+import WebApp from '@twa-dev/sdk';
 import { PropsWithChildren, createContext, useContext, useEffect, useState } from 'react';
 
 interface TelegramContextType {
-  webApp: any | null;
+  webApp: typeof WebApp | null;
   ready: boolean;
 }
 
@@ -15,7 +16,7 @@ const TelegramContext = createContext<TelegramContextType>({
 export const useTelegram = () => useContext(TelegramContext);
 
 export function TelegramProvider({ children }: PropsWithChildren) {
-  const [webApp, setWebApp] = useState<any>(null);
+  const [webApp, setWebApp] = useState<typeof WebApp | null>(null);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
