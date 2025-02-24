@@ -7,6 +7,11 @@ import { PropsWithChildren } from 'react';
 export function MainLayout({ children }: PropsWithChildren) {
   return (
     <>
+      <Container>
+        <header>
+          <div style={{height: 60}}></div>
+        </header>
+      </Container>
       <Container p="md" px={16} pb={100} >
         {children}
       </Container>
