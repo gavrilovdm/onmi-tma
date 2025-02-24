@@ -1,11 +1,12 @@
 "use client";
 
 import { Stack, Flex, Group, Button } from '@mantine/core';
-import { GradientBackground } from '@/components/background/gradient-background';
-import { ActionButton } from './components/action-button';
-import { StatBadge } from './components/stat-badge';
+import { GradientBackground } from './components/background/gradient-background';
+import { ActionButton } from './components/action-button/action-button';
+import { StatBadge } from './components/stat-badge/stat-badge';
 import { useState, useEffect } from 'react';
-import { CollectButton } from './components/collect-button';
+import { CollectButton } from './components/collect-button/collect-button';
+import styles from './profile.module.scss';
 
 interface Action {
   label: string;
@@ -93,33 +94,15 @@ export default function ProfilePage() {
       <GradientBackground />
 
       {/* Character Container */}
-      <div style={{
-        position: 'fixed',
-        left: '50%',
-        transform: 'translate(-50%, -18%)',
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: 1,
-      }}>
-        <img
-          src="/character.png"
-          alt="Character"
-          style={{
-            maxHeight: '70%',
-            objectFit: 'contain',
-          }}
-        />
+      <div className={styles.character}>
+        <img src="/character.png" alt="Character" />
       </div>
 
       {/* Top Stats */}
       <Group justify="space-between" align="flex-start">
         <Button 
           color="rgba(255, 255, 255, 0.16)" 
-          p={0}
-          style={{borderRadius: 16, width: 55, height: 55}}
+          className={styles.customizeButton}
         >
           <img src="/icons/customize-icon.svg" alt="Customize" width={22} height={22} />
         </Button>
@@ -128,29 +111,16 @@ export default function ProfilePage() {
           align="flex-end"
           direction="column"
           wrap="wrap"
-          style={{ position: 'relative', zIndex: 2 }}>
+          className={styles.stats}>
           <StatBadge icon="/icons/coin-icon.svg" value={120400} />
           <StatBadge icon="/icons/xp-icon.svg" value={3000} />
         </Flex>
       </Group>
 
       {/* Bottom Actions */}
-      <div style={{
-        position: 'fixed',
-        bottom: 100,
-        left: 0,
-        right: 0,
-        zIndex: 2,
-      }}>
+      <div className={styles.actions}>
         <Stack align="center" gap="md">
-          <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: 7,
-            padding: '0 16px',
-            width: '100%',
-            margin: '0 auto',
-          }}>
+          <div className={styles.grid}>
             {actions.map((action) => (
               <ActionButton
                 key={action.id}

@@ -1,0 +1,16 @@
+.button {
+  background: #2B5FF6;
+  border-radius: 32px;
+  padding: 8px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.2);
+  transition: width 0.3s ease;
+} 

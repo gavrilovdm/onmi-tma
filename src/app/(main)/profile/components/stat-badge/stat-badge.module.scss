@@ -1,0 +1,16 @@
+.badge {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 20px;
+  min-width: 104px;
+
+  .iconContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+  }
+
+  .value {
+    margin-right: 12px;
+  }
+} 
