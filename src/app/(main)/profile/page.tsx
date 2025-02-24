@@ -1,9 +1,11 @@
 "use client";
 
-import { Stack, Group, Text } from '@mantine/core';
+import { Stack, Flex, Group, Button } from '@mantine/core';
 import { GradientBackground } from '@/components/background/gradient-background';
 import { ActionButton } from './components/action-button';
+import { StatBadge } from './components/stat-badge';
 import { useState, useEffect } from 'react';
+import { CollectButton } from './components/collect-button';
 
 interface Action {
   label: string;
@@ -94,7 +96,7 @@ export default function ProfilePage() {
       <div style={{
         position: 'fixed',
         left: '50%',
-        transform: 'translate(-50%, -10%)',
+        transform: 'translate(-50%, -18%)',
         width: '100%',
         height: '100%',
         display: 'flex',
@@ -113,15 +115,23 @@ export default function ProfilePage() {
       </div>
 
       {/* Top Stats */}
-      <Group justify="flex-end" p="md" style={{ position: 'relative', zIndex: 2 }}>
-        <Group gap="xs">
-          <img src="/icons/coin-icon.svg" alt="Coins" width={24} height={24} />
-          <Text c="white" fw={500}>120.4k</Text>
-        </Group>
-        <Group gap="xs">
-          <img src="/icons/xp-icon.svg" alt="XP" width={24} height={24} />
-          <Text c="white" fw={500}>3000</Text>
-        </Group>
+      <Group justify="space-between" align="flex-start">
+        <Button 
+          color="rgba(255, 255, 255, 0.16)" 
+          p={0}
+          style={{borderRadius: 16, width: 55, height: 55}}
+        >
+          <img src="/icons/customize-icon.svg" alt="Customize" width={22} height={22} />
+        </Button>
+        <Flex
+          gap="3px"
+          align="flex-end"
+          direction="column"
+          wrap="wrap"
+          style={{ position: 'relative', zIndex: 2 }}>
+          <StatBadge icon="/icons/coin-icon.svg" value={120400} />
+          <StatBadge icon="/icons/xp-icon.svg" value={3000} />
+        </Flex>
       </Group>
 
       {/* Bottom Actions */}
@@ -156,29 +166,5 @@ export default function ProfilePage() {
         </Stack>
       </div>
     </>
-  );
-}
-
-function CollectButton({ progress }: { progress: number }) {
-  return (
-    <div style={{
-      background: '#2B5FF6',
-      borderRadius: 32,
-      padding: '8px 24px',
-      position: 'relative',
-      overflow: 'hidden',
-    }}>
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        bottom: 0,
-        width: `${progress}%`,
-        background: 'rgba(255, 255, 255, 0.2)',
-      }} />
-      <Text c="white" fw={500}>
-        Collect {progress}%
-      </Text>
-    </div>
   );
 } 
