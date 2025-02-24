@@ -7,7 +7,7 @@ import { PropsWithChildren } from 'react';
 export function MainLayout({ children }: PropsWithChildren) {
   return (
     <>
-      <Container p="md" pb={100} >
+      <Container p="md" px={16} pb={100} >
         {children}
       </Container>
       <BottomNav/>
