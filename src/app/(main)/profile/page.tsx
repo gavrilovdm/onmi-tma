@@ -1,12 +1,15 @@
 "use client";
 
-import { Stack, Flex, Group, Button } from '@mantine/core';
+import { Stack, Group, Button, Box } from '@mantine/core';
 import { GradientBackground } from './components/background/gradient-background';
 import { ActionButton } from './components/action-button/action-button';
 import { StatBadge } from './components/stat-badge/stat-badge';
 import { useState, useEffect } from 'react';
 import { CollectButton } from './components/collect-button/collect-button';
 import styles from './profile.module.scss';
+import { motion } from 'framer-motion';
+import { ProgressBar } from './components/progress-bar/progress-bar';
+import { InventoryCard } from './components/inventory-card/inventory-card';
 
 interface Action {
   label: string;
@@ -16,17 +19,30 @@ interface Action {
   id: string;
 }
 
-const TIMER_DURATION = 5;
-
 const initialActions: Action[] = [
   { label: "Feed", icon: "/icons/feed-icon.svg", isReady: true, id: "feed" },
   { label: "Train", icon: "/icons/train-icon.svg", isReady: true, id: "train" },
   { label: "Sleep", icon: "/icons/sleep-icon.svg", isReady: true, id: "sleep" },
 ];
 
+const progressBarsData = [
+  { icon: "/icons/power.svg", label: "Power", value: 12.2, maxValue: 15 },
+  { icon: "/icons/energy.svg", label: "Energy", value: 24.0, maxValue: 25 },
+  { icon: "/icons/spell.svg", label: "Spell", value: 33.1, maxValue: 70 },
+];
+
+const inventoryData = [
+  { type: "hat" as const },
+  { type: "top" as const },
+  { type: "trouser" as const, imageSrc: "/inventory/trouser.png" },
+  { type: "shoes" as const, imageSrc: "/inventory/shoes.png" },
+];
+
 export default function ProfilePage() {
   const [actions, setActions] = useState<Action[]>(initialActions);
   const [timers, setTimers] = useState<{ [key: string]: number }>({});
+
+  const [isCustomizeOpen, setIsCustomizeOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -70,7 +86,7 @@ export default function ProfilePage() {
 
     setTimers(prev => ({
       ...prev,
-      [id]: TIMER_DURATION
+      [id]: getTimerDuration(action)
     }));
 
     setActions(prevActions =>
@@ -82,6 +98,10 @@ export default function ProfilePage() {
     );
   };
 
+  const getTimerDuration = (action: Action) => {
+    return action.id === "feed" ? 5 : action.id === "train" ? 10 : action.id === "sleep" ? 15 : 0;
+  };
+
   // Форматирование времени в формат MM:SS
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
@@ -89,36 +109,62 @@ export default function ProfilePage() {
     return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
 
+  const toggleCustomize = () => {
+    setIsCustomizeOpen(!isCustomizeOpen);
+  };
+
   return (
     <>
-      <GradientBackground />
+      <GradientBackground isCustomizeOpen={isCustomizeOpen} />
 
       {/* Character Container */}
-      <div className={styles.character}>
+      <motion.div 
+        className={styles.character}
+        animate={{
+          scale: isCustomizeOpen ? 0.7275 : 1,
+          y: isCustomizeOpen ? -60 : 0,
+          transition: { duration: 0.3, ease: "easeInOut" }
+        }}
+      >
         <img src="/character.png" alt="Character" />
-      </div>
+      </motion.div>
 
-      {/* Top Stats */}
-      <Group justify="space-between" align="flex-start">
-        <Button 
-          color="rgba(255, 255, 255, 0.16)" 
-          className={styles.customizeButton}
+      {/* Top Stats and Customize Button */}
+      <Group justify="space-between" align="flex-start" className={styles.stats}>
+        <motion.div
+          whileTap={{ scale: 0.95 }}
         >
-          <img src="/icons/customize-icon.svg" alt="Customize" width={22} height={22} />
-        </Button>
-        <Flex
-          gap="3px"
-          align="flex-end"
-          direction="column"
-          wrap="wrap"
-          className={styles.stats}>
+          <Button 
+            color={isCustomizeOpen ? styles.primaryBlue : styles.transparentWhite}
+            className={styles.customizeButton}
+            onClick={toggleCustomize}
+          >
+            <img src="/icons/customize-icon.svg" alt="Customize" width={22} height={22} />
+          </Button>
+        </motion.div>
+        <motion.div
+          animate={{
+            opacity: isCustomizeOpen ? 0 : 1,
+            x: isCustomizeOpen ? 50 : 0,
+            transition: { duration: 0.3, ease: "easeOut" }
+          }}
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '3px' }}
+        >
           <StatBadge icon="/icons/coin-icon.svg" value={120400} />
           <StatBadge icon="/icons/xp-icon.svg" value={3000} />
-        </Flex>
+        </motion.div>
       </Group>
 
       {/* Bottom Actions */}
-      <div className={styles.actions}>
+      <motion.div 
+        className={styles.actions}
+        animate={{
+          opacity: isCustomizeOpen ? 0 : 1,
+          y: isCustomizeOpen ? 50 : 0,
+          transition: { duration: 0.3, ease: "easeOut" }
+        }}
+        style={{ pointerEvents: isCustomizeOpen ? 'none' : 'auto' }}
+      >
         <Stack align="center" gap="md">
           <div className={styles.grid}>
             {actions.map((action) => (
@@ -134,7 +180,45 @@ export default function ProfilePage() {
           </div>
           <CollectButton progress={32} />
         </Stack>
-      </div>
+      </motion.div>
+
+      {/* Customize Panel */}
+      <motion.div 
+        className={styles.customizePanel}
+        initial={{ opacity: 0, y: 50 }}
+        animate={{
+          opacity: isCustomizeOpen ? 1 : 0,
+          y: isCustomizeOpen ? 0 : 50,
+          transition: { duration: 0.3, delay: isCustomizeOpen ? 0.2 : 0, ease: "easeOut" }
+        }}
+        style={{ pointerEvents: isCustomizeOpen ? 'auto' : 'none' }}
+      >
+        {/* Stats Progress Bars */}
+        <Group gap="22px">
+          <Group gap="6px" style={{ width: '100%' }}>
+            {progressBarsData.map((data, index) => (
+              <ProgressBar
+                key={index}
+                icon={data.icon}
+                label={data.label}
+                value={data.value}
+                maxValue={data.maxValue}
+              />
+            ))}
+          </Group>
+          
+          {/* Inventory Cards */}
+          <Group gap="6px" style={{ width: '100%', justifyContent: 'space-between' }}>
+            {inventoryData.map((item, index) => (
+              <InventoryCard
+                key={index}
+                type={item.type}
+                imageSrc={item.imageSrc}
+              />
+            ))}
+          </Group>
+        </Group>
+      </motion.div>
     </>
   );
 } 

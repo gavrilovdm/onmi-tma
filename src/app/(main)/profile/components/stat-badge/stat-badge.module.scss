@@ -1,5 +1,7 @@
+@import "/src/styles/theme.module.scss";
+
 .badge {
-  background: rgba(255, 255, 255, 0.16);
+  background: $transparent-white;
   border-radius: 20px;
   min-width: 104px;
 

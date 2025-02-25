@@ -1,0 +1,11 @@
+@import "./variables.module.scss";
+
+$transparent-white: $transparent-white;
+$primary-blue: $primary-blue;
+$light-blue: $light-blue;
+
+:export {
+  transparentWhite: $transparent-white;
+  primaryBlue: $primary-blue;
+  lightBlue: $light-blue;
+}

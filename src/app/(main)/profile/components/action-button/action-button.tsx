@@ -3,6 +3,7 @@
 import { Text } from '@mantine/core';
 import styles from './action-button.module.scss';
 import { clsx } from 'clsx';
+import { motion } from 'framer-motion';
 
 interface ActionButtonProps {
   label: string;
@@ -14,7 +15,7 @@ interface ActionButtonProps {
 
 export function ActionButton({ label, icon, isReady, timer, onClick }: ActionButtonProps) {
   return (
-    <div className={styles.button} onClick={onClick}>
+    <motion.div className={styles.button} onClick={onClick} whileTap={{ scale: isReady ? 0.95 : 1 }}>
       <div className={clsx(styles.container, isReady ? styles.ready : styles.disabled)}>
         <img src={icon} alt={label} width={24} height={24} className={styles.icon} />
         <Text c="white" size="sm" className={styles.label}>{label}</Text>
@@ -25,7 +26,7 @@ export function ActionButton({ label, icon, isReady, timer, onClick }: ActionBut
           <Text c="white" className={styles.readyLabel}>Ready</Text>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
