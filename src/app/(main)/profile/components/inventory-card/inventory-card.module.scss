@@ -1,3 +1,5 @@
+@import "/src/styles/theme.module.scss";
+
 .container {
   display: flex;
   flex-direction: column;
@@ -17,6 +19,16 @@
   backdrop-filter: blur(2px);
   transform: translateZ(0);
   will-change: transform;
+
+  @media (max-width: $breakpoint-mobile-l) {
+    width: 80px;
+    height: 80px;
+  }
+
+  @media (max-width: $breakpoint-mobile-m) {
+    width: 65px;
+    height: 65px;
+  }
 }
 
 .image {

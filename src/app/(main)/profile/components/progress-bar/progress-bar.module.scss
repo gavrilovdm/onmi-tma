@@ -1,23 +1,43 @@
-@import '@/styles/variables.module.scss';
+@import "/src/styles/theme.module.scss";
 
 .container {
   width: 100%;
   border-radius: 12px;
   background-color: rgba(255, 255, 255, 0.05);
+
+  @media (max-width: $breakpoint-mobile-m) {
+    border-radius: 10px;
+  }
 }
 
 .group {
   margin: 5px;
+
+  @media (max-width: $breakpoint-mobile-m) {
+    margin: 5px 0;
+  }
 }
 
 .icon {
   margin-left: 16px;
+
+  @media (max-width: $breakpoint-mobile-l) {
+    margin-left: 12px;
+  }
+
+  @media (max-width: $breakpoint-mobile-m) {
+    margin-left: 8px;
+  }
 }
 
 .value {
   color: white;
   font-weight: 600;
   font-size: 14px;
+
+  @media (max-width: $breakpoint-mobile-m) {
+    font-size: 12px;
+  }
 }
 
 .progressDots {
@@ -35,6 +55,14 @@
   
   &:not(:last-child) {
     margin-right: 4px;
+
+    @media (max-width: $breakpoint-mobile-l) {
+      margin-right: 3.75px;
+    }
+
+    @media (max-width: $breakpoint-mobile-m) {
+      margin-right: 2.5px;
+    }
   }
   
   &.active {
@@ -50,6 +78,11 @@
       background-color: $spell-color;
     }
   }
+
+  @media (max-width: $breakpoint-mobile-m) {
+    width: 5px;
+    height: 5px;
+  }
 } 
 
 .button {
@@ -62,4 +95,14 @@
   color: white;
   font-weight: 500;
   font-size: 14px;
+
+  @media (max-width: $breakpoint-mobile-l) {
+    width: 35px;
+    font-size: 12px;
+  }
+
+  @media (max-width: $breakpoint-mobile-m) {
+    width: 30px;
+    font-size: 10px;
+  }
 }

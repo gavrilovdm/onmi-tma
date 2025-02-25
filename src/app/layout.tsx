@@ -28,7 +28,7 @@ export default function RootLayout({
       <head>
         <ColorSchemeScript />
       </head>
-      <body suppressHydrationWarning style={{ backgroundColor: 'black' }}>
+      <body suppressHydrationWarning className='main-container'>
         <TelegramProvider>
           <MantineProvider>
             <RoutePreloader />
