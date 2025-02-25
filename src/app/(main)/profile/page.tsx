@@ -220,7 +220,9 @@ export default function ProfilePage() {
         style={{ 
           pointerEvents: isCustomizeOpen ? 'auto' : 'none',
           willChange: 'transform',
-          transform: 'translateZ(0)'
+          transform: 'translateZ(0)',
+          maxWidth: '425px',
+          margin: '0 auto'
         }}
       >
         {/* Stats Progress Bars */}

@@ -35,6 +35,8 @@ export function BottomNav() {
         background: 'transparent',
         padding: '24px 48px',
         zIndex: 100,
+        maxWidth: '425px',
+        margin: '0 auto'
       }}
     >
       {NAV_ITEMS.map((item) => (
