@@ -1,5 +1,6 @@
 import { Group, Box, Text, Button } from '@mantine/core';
 import styles from './progress-bar.module.scss';
+import Image from 'next/image';
 
 interface ProgressBarProps {
   icon: string;
@@ -14,7 +15,7 @@ export function ProgressBar({ icon, label, value, maxValue }: ProgressBarProps) 
   return (
     <Box className={styles.container}>
       <Group align="center" className={styles.group}>
-        <img src={icon} alt={label} className={styles.icon} />
+        <Image src={icon} alt={label} width={12} height={12} className={styles.icon} />
         <Text className={styles.value}>{value.toFixed(1)}</Text>
         <div className={styles.progressDots}>
             {Array.from({ length: 20 }).map((_, index) => (

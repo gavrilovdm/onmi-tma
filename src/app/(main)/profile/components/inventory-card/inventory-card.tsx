@@ -1,7 +1,7 @@
-import { Box, Text } from '@mantine/core';
+import { Box } from '@mantine/core';
 import styles from './inventory-card.module.scss';
 import { motion } from 'framer-motion';
-
+import Image from 'next/image';
 type ItemType = 'hat' | 'top' | 'trouser' | 'shoes';
 
 interface InventoryCardProps {
@@ -21,7 +21,7 @@ export function InventoryCard({ type, imageSrc, onClick }: InventoryCardProps) {
     >
       <Box className={styles.card}>
         {imageSrc ? (
-          <img src={imageSrc} alt={capitalizedType} className={styles.image} />
+          <Image src={imageSrc} alt={capitalizedType} width={100} height={100} className={styles.image} />
         ) : (
           <div className={styles.placeholder}>
             <span>+</span>

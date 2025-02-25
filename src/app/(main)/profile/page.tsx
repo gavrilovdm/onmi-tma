@@ -1,6 +1,6 @@
 "use client";
 
-import { Stack, Group, Button, Box } from '@mantine/core';
+import { Stack, Group, Button } from '@mantine/core';
 import { GradientBackground } from './components/background/gradient-background';
 import { ActionButton } from './components/action-button/action-button';
 import { StatBadge } from './components/stat-badge/stat-badge';
@@ -10,7 +10,7 @@ import styles from './profile.module.scss';
 import { motion } from 'framer-motion';
 import { ProgressBar } from './components/progress-bar/progress-bar';
 import { InventoryCard } from './components/inventory-card/inventory-card';
-
+import Image from 'next/image';
 interface Action {
   label: string;
   icon: string;
@@ -126,7 +126,14 @@ export default function ProfilePage() {
           transition: { duration: 0.3, ease: "easeInOut" }
         }}
       >
-        <img src="/character.png" alt="Character" />
+        <Image src="/character.png" alt="Character" width={500} height={800} 
+        style={{
+          width: '100%',
+          height: 'auto',
+          maxHeight: '70%',
+          objectFit: 'contain'
+        }}
+        />
       </motion.div>
 
       {/* Top Stats and Customize Button */}
@@ -139,7 +146,7 @@ export default function ProfilePage() {
             className={styles.customizeButton}
             onClick={toggleCustomize}
           >
-            <img src="/icons/customize-icon.svg" alt="Customize" width={22} height={22} />
+            <Image src="/icons/customize-icon.svg" alt="Customize" width={22} height={22} />
           </Button>
         </motion.div>
         <motion.div
