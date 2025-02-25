@@ -187,8 +187,7 @@ export default function ProfilePage() {
           transition: { duration: 0.3, ease: "easeOut" }
         }}
         style={{ 
-          pointerEvents: isCustomizeOpen ? 'none' : 'auto',
-          willChange: 'transform, opacity',
+          willChange: 'transform',
           transform: 'translateZ(0)'
         }}
       >
@@ -220,7 +219,7 @@ export default function ProfilePage() {
         }}
         style={{ 
           pointerEvents: isCustomizeOpen ? 'auto' : 'none',
-          willChange: 'transform, opacity',
+          willChange: 'transform',
           transform: 'translateZ(0)'
         }}
       >

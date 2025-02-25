@@ -21,7 +21,7 @@
   }
 
   &.disabled {
-    background: $transparent-white;
+    background-color: $transparent-white;
     backdrop-filter: blur(10px);
   }
 }
