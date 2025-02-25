@@ -25,6 +25,7 @@ export function TelegramProvider({ children }: PropsWithChildren) {
         // Динамический импорт SDK только на клиенте
         const WebApp = (await import('@twa-dev/sdk')).default;
         setWebApp(WebApp);
+        WebApp.ready();
         setReady(true);
         
         WebApp.expand();

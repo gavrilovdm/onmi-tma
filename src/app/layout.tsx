@@ -26,7 +26,7 @@ export default function RootLayout({
       <head>
         <ColorSchemeScript />
       </head>
-      <body suppressHydrationWarning>
+      <body suppressHydrationWarning style={{ backgroundColor: 'black' }}>
         <TelegramProvider>
           <MantineProvider>
             {children}
