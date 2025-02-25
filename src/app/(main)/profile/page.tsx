@@ -8,6 +8,8 @@ import { useState, useEffect } from 'react';
 import { CollectButton } from './components/collect-button/collect-button';
 import styles from './profile.module.scss';
 import { motion } from 'framer-motion';
+import { ProgressBar } from './components/progress-bar/progress-bar';
+import { InventoryCard } from './components/inventory-card/inventory-card';
 
 interface Action {
   label: string;
@@ -17,12 +19,23 @@ interface Action {
   id: string;
 }
 
-const TIMER_DURATION = 5;
-
 const initialActions: Action[] = [
   { label: "Feed", icon: "/icons/feed-icon.svg", isReady: true, id: "feed" },
   { label: "Train", icon: "/icons/train-icon.svg", isReady: true, id: "train" },
   { label: "Sleep", icon: "/icons/sleep-icon.svg", isReady: true, id: "sleep" },
+];
+
+const progressBarsData = [
+  { icon: "/icons/power.svg", label: "Power", value: 12.2, maxValue: 15 },
+  { icon: "/icons/energy.svg", label: "Energy", value: 24.0, maxValue: 25 },
+  { icon: "/icons/spell.svg", label: "Spell", value: 33.1, maxValue: 70 },
+];
+
+const inventoryData = [
+  { type: "hat" as const },
+  { type: "top" as const },
+  { type: "trouser" as const, imageSrc: "/inventory/trouser.png" },
+  { type: "shoes" as const, imageSrc: "/inventory/shoes.png" },
 ];
 
 export default function ProfilePage() {
@@ -73,7 +86,7 @@ export default function ProfilePage() {
 
     setTimers(prev => ({
       ...prev,
-      [id]: TIMER_DURATION
+      [id]: getTimerDuration(action)
     }));
 
     setActions(prevActions =>
@@ -83,6 +96,10 @@ export default function ProfilePage() {
           : action
       )
     );
+  };
+
+  const getTimerDuration = (action: Action) => {
+    return action.id === "feed" ? 5 : action.id === "train" ? 10 : action.id === "sleep" ? 15 : 0;
   };
 
   // Форматирование времени в формат MM:SS
@@ -176,13 +193,31 @@ export default function ProfilePage() {
         }}
         style={{ pointerEvents: isCustomizeOpen ? 'auto' : 'none' }}
       >
-        <Box p="xl" bg="rgba(255, 255, 255, 0.1)" style={{ borderRadius: '16px', backdropFilter: 'blur(10px)', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
-          <Stack align="center" gap="md">
-            <h2 style={{ color: 'white', margin: 0, fontSize: '20px' }}>Customize Your Character</h2>
-            <div style={{ width: '100%', height: '1px', background: 'rgba(255, 255, 255, 0.1)' }}></div>
-            <p style={{ color: 'white', textAlign: 'center', margin: 0 }}>Customization options will appear here</p>
-          </Stack>
-        </Box>
+        {/* Stats Progress Bars */}
+        <Group gap="22px">
+          <Group gap="6px" style={{ width: '100%' }}>
+            {progressBarsData.map((data, index) => (
+              <ProgressBar
+                key={index}
+                icon={data.icon}
+                label={data.label}
+                value={data.value}
+                maxValue={data.maxValue}
+              />
+            ))}
+          </Group>
+          
+          {/* Inventory Cards */}
+          <Group gap="6px" style={{ width: '100%', justifyContent: 'space-between' }}>
+            {inventoryData.map((item, index) => (
+              <InventoryCard
+                key={index}
+                type={item.type}
+                imageSrc={item.imageSrc}
+              />
+            ))}
+          </Group>
+        </Group>
       </motion.div>
     </>
   );

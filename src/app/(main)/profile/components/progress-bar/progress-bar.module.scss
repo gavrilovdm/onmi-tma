@@ -1,0 +1,65 @@
+@import '@/styles/variables.module.scss';
+
+.container {
+  width: 100%;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.group {
+  margin: 5px;
+}
+
+.icon {
+  margin-left: 16px;
+}
+
+.value {
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.progressDots {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.05);
+  
+  &:not(:last-child) {
+    margin-right: 4px;
+  }
+  
+  &.active {
+    &.power {
+      background-color: $power-color;
+    }
+    
+    &.energy {
+      background-color: $energy-color;
+    }
+    
+    &.spell {
+      background-color: $spell-color;
+    }
+  }
+} 
+
+.button {
+  width: 42px;
+  height: 25px;
+  padding: 5px;
+  margin-left: auto;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.13);
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+}
