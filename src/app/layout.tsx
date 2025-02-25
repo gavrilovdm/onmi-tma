@@ -1,4 +1,5 @@
 import '@mantine/core/styles.css';
+import '@/styles/globals.scss';
 import { ColorSchemeScript } from '@mantine/core';
 import { TelegramProvider } from '@/components/providers/telegram-provider';
 import { MantineProvider } from '@/components/providers/mantine-provider';
