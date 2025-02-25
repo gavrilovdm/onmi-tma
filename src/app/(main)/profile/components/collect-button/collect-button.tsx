@@ -2,6 +2,7 @@
 
 import { Text } from '@mantine/core';
 import styles from './collect-button.module.scss';
+import { motion } from 'framer-motion';
 
 interface CollectButtonProps {
   progress: number;
@@ -9,7 +10,9 @@ interface CollectButtonProps {
 
 export function CollectButton({ progress }: CollectButtonProps) {
   return (
-    <div className={styles.button}>
+    <motion.div className={styles.button}
+      whileTap={{ scale: 0.95 }}
+    >
       <div 
         className={styles.progress} 
         style={{ width: `${progress}%` }}
@@ -17,6 +20,6 @@ export function CollectButton({ progress }: CollectButtonProps) {
       <Text c="white" fw={500}>
         Collect {progress}%
       </Text>
-    </div>
+    </motion.div>
   );
 }
