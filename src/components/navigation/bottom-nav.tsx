@@ -1,6 +1,6 @@
 "use client";
 
-import { Group, UnstyledButton, Stack, Image, Text } from '@mantine/core';
+import { Group, UnstyledButton, Stack, Image } from '@mantine/core';
 import { usePathname, useRouter } from 'next/navigation';
 import { ReactNode } from 'react';
 
