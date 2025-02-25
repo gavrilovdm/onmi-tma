@@ -125,13 +125,18 @@ export default function ProfilePage() {
           y: isCustomizeOpen ? -60 : 0,
           transition: { duration: 0.3, ease: "easeInOut" }
         }}
+        style={{
+          willChange: 'transform',
+          transform: 'translateZ(0)'
+        }}
       >
         <Image src="/character.png" alt="Character" width={500} height={800} 
         style={{
           width: '100%',
           height: 'auto',
           maxHeight: '70%',
-          objectFit: 'contain'
+          objectFit: 'contain',
+          transform: 'translateZ(0)'
         }}
         />
       </motion.div>
@@ -140,6 +145,10 @@ export default function ProfilePage() {
       <Group justify="space-between" align="flex-start" className={styles.stats}>
         <motion.div
           whileTap={{ scale: 0.95 }}
+          style={{
+            willChange: 'transform',
+            transform: 'translateZ(0)'
+          }}
         >
           <Button 
             color={isCustomizeOpen ? styles.primaryBlue : styles.transparentWhite}
@@ -155,7 +164,14 @@ export default function ProfilePage() {
             x: isCustomizeOpen ? 50 : 0,
             transition: { duration: 0.3, ease: "easeOut" }
           }}
-          style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '3px' }}
+          style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'flex-end', 
+            gap: '3px',
+            willChange: 'transform, opacity',
+            transform: 'translateZ(0)'
+          }}
         >
           <StatBadge icon="/icons/coin-icon.svg" value={120400} />
           <StatBadge icon="/icons/xp-icon.svg" value={3000} />
@@ -170,7 +186,11 @@ export default function ProfilePage() {
           y: isCustomizeOpen ? 50 : 0,
           transition: { duration: 0.3, ease: "easeOut" }
         }}
-        style={{ pointerEvents: isCustomizeOpen ? 'none' : 'auto' }}
+        style={{ 
+          pointerEvents: isCustomizeOpen ? 'none' : 'auto',
+          willChange: 'transform, opacity',
+          transform: 'translateZ(0)'
+        }}
       >
         <Stack align="center" gap="md">
           <div className={styles.grid}>
@@ -198,7 +218,11 @@ export default function ProfilePage() {
           y: isCustomizeOpen ? 0 : 50,
           transition: { duration: 0.3, delay: isCustomizeOpen ? 0.2 : 0, ease: "easeOut" }
         }}
-        style={{ pointerEvents: isCustomizeOpen ? 'auto' : 'none' }}
+        style={{ 
+          pointerEvents: isCustomizeOpen ? 'auto' : 'none',
+          willChange: 'transform, opacity',
+          transform: 'translateZ(0)'
+        }}
       >
         {/* Stats Progress Bars */}
         <Group gap="22px">
