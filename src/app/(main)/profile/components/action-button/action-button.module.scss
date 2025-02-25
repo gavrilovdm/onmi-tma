@@ -1,3 +1,5 @@
+@import "/src/styles/theme.module.scss";
+
 .button {
   flex: 1 1 0;
   max-width: 115px;
@@ -16,11 +18,11 @@
   padding: 18px;
 
   &.ready {
-    background: rgba(51, 120, 255, 0.41);
+    background: $light-blue;
   }
 
   &.disabled {
-    background: rgba(255, 255, 255, 0.16);
+    background: $transparent-white;
     opacity: 0.6;
   }
 }
@@ -42,7 +44,7 @@
 }
 
 .readyLabel {
-  background: rgb(51, 76, 255);
+  background: $primary-blue;
   border-radius: 100px;
   padding: 4px 8px;
   font-size: 12px;

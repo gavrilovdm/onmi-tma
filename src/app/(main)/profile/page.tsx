@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import { CollectButton } from './components/collect-button/collect-button';
 import styles from './profile.module.scss';
 
+
 interface Action {
   label: string;
   icon: string;
@@ -27,6 +28,8 @@ const initialActions: Action[] = [
 export default function ProfilePage() {
   const [actions, setActions] = useState<Action[]>(initialActions);
   const [timers, setTimers] = useState<{ [key: string]: number }>({});
+
+  const [isCustomizeOpen, setIsCustomizeOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -98,11 +101,12 @@ export default function ProfilePage() {
         <img src="/character.png" alt="Character" />
       </div>
 
-      {/* Top Stats */}
-      <Group justify="space-between" align="flex-start">
+      {/* Top Stats and Customize Button */}
+      <Group justify="space-between" align="flex-start" className={styles.stats}>
         <Button 
-          color="rgba(255, 255, 255, 0.16)" 
+          color={isCustomizeOpen ? styles.primaryBlue : styles.transparentWhite}
           className={styles.customizeButton}
+          onClick={() => setIsCustomizeOpen(!isCustomizeOpen)}
         >
           <img src="/icons/customize-icon.svg" alt="Customize" width={22} height={22} />
         </Button>
