@@ -3,6 +3,7 @@ import '@/styles/globals.scss';
 import { ColorSchemeScript } from '@mantine/core';
 import { TelegramProvider } from '@/components/providers/telegram-provider';
 import { MantineProvider } from '@/components/providers/mantine-provider';
+import { RoutePreloader } from '@/components/providers/route-preloader';
 import { Viewport } from 'next';
 
 export const viewport: Viewport = {
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body suppressHydrationWarning style={{ backgroundColor: 'black' }}>
         <TelegramProvider>
           <MantineProvider>
+            <RoutePreloader />
             {children}
           </MantineProvider>
         </TelegramProvider>

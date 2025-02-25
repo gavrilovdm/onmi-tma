@@ -5,6 +5,8 @@
   right: 5%;
   bottom: 15%;
   z-index: -1;
+  transform: translateZ(0);
+  will-change: transform;
 
   &::after {
     position: absolute;
@@ -16,5 +18,7 @@
     background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(26, 44, 77, 1) 62%, rgba(20, 49, 81, 1) 100%);
     filter: blur(50px);
     z-index: -1;
+    transform: translateZ(0);
+    will-change: transform;
   }
 } 
