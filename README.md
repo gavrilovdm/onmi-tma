@@ -16,6 +16,7 @@ Web application built with Next.js and React in purposes of testing Telegram Web
   - TypeScript
   - ESLint
   - Telegram Web App SDK (@twa-dev/sdk)
+- **State Management**: Zustand
 
 ## 🏗️ Project Structure
 
