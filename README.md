@@ -64,7 +64,7 @@ npm start
 
 ## 🛠️ Development Features
 
-- Local HTTPS support with experimental Next.js features
+- Local HTTPS support with experimental Next.js features (need for running TWA in development mode, or you can use ngrok to expose your local server to the internet)
 - TypeScript configuration for type safety
 - ESLint setup for code quality
 - Integration with Telegram Web App SDK
