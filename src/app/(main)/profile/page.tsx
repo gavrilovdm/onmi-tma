@@ -11,19 +11,7 @@ import { motion } from 'framer-motion';
 import { ProgressBar } from './components/progress-bar/progress-bar';
 import { InventoryCard } from './components/inventory-card/inventory-card';
 import Image from 'next/image';
-interface Action {
-  label: string;
-  icon: string;
-  isReady?: boolean;
-  timer?: string;
-  id: string;
-}
-
-const initialActions: Action[] = [
-  { label: "Feed", icon: "/icons/feed-icon.svg", isReady: true, id: "feed" },
-  { label: "Train", icon: "/icons/train-icon.svg", isReady: true, id: "train" },
-  { label: "Sleep", icon: "/icons/sleep-icon.svg", isReady: true, id: "sleep" },
-];
+import { useStore } from '@/store';
 
 const progressBarsData = [
   { icon: "/icons/power.svg", label: "Power", value: 12.2, maxValue: 15 },
@@ -39,66 +27,27 @@ const inventoryData = [
 ];
 
 export default function ProfilePage() {
-  const [actions, setActions] = useState<Action[]>(initialActions);
-  const [timers, setTimers] = useState<{ [key: string]: number }>({});
-
+  const { actions, timers, setTimer, updateAction, decrementTimers } = useStore();
   const [isCustomizeOpen, setIsCustomizeOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimers(prevTimers => {
-        const newTimers = { ...prevTimers };
-        const expiredTimers: string[] = [];
-
-        // Проверяем все таймеры
-        Object.entries(prevTimers).forEach(([id, timeLeft]) => {
-          if (timeLeft <= 1) { // Изменено с 0 на 1
-            expiredTimers.push(id);
-          } else {
-            newTimers[id] = timeLeft - 1;
-          }
-        });
-
-        // Если есть истекшие таймеры, обновляем действия
-        if (expiredTimers.length > 0) {
-          setActions(prevActions =>
-            prevActions.map(action =>
-              expiredTimers.includes(action.id)
-                ? { ...action, isReady: true, timer: undefined }
-                : action
-            )
-          );
-          
-          // Удаляем истекшие таймеры
-          expiredTimers.forEach(id => delete newTimers[id]);
-        }
-
-        return newTimers;
-      });
+      decrementTimers();
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [decrementTimers]);
 
   const handleClick = (id: string) => {
     const action = actions.find(a => a.id === id);
     if (!action?.isReady) return;
 
-    setTimers(prev => ({
-      ...prev,
-      [id]: getTimerDuration(action)
-    }));
-
-    setActions(prevActions =>
-      prevActions.map(action =>
-        action.id === id
-          ? { ...action, isReady: false }
-          : action
-      )
-    );
+    const duration = getTimerDuration(action);
+    setTimer(id, duration);
+    updateAction(id, false);
   };
 
-  const getTimerDuration = (action: Action) => {
+  const getTimerDuration = (action: { id: string }) => {
     return action.id === "feed" ? 5 : action.id === "train" ? 10 : action.id === "sleep" ? 15 : 0;
   };
 
@@ -199,7 +148,7 @@ export default function ProfilePage() {
                 label={action.label}
                 icon={action.icon}
                 isReady={action.isReady}
-                timer={timers[action.id] ? formatTime(timers[action.id]) : action.timer}
+                timer={timers[action.id] ? formatTime(timers[action.id]) : undefined}
                 onClick={() => handleClick(action.id)}
               />
             ))}
