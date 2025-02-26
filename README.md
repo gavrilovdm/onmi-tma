@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# React App
 
-## Getting Started
+Web application built with Next.js and React in purposes of testing Telegram Web App SDK.
 
-First, run the development server:
+## 🚀 Technologies Used
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Framework**: Next.js 15.1.7
+- **UI Library**: React 19
+- **Styling**:
+  - Mantine UI (@mantine/core, @mantine/hooks)
+  - Emotion (@emotion/react)
+  - SASS
+  - clsx for conditional class names
+- **Animations**: Framer Motion
+- **Development**:
+  - TypeScript
+  - ESLint
+  - Telegram Web App SDK (@twa-dev/sdk)
+
+## 🏗️ Project Structure
+
+```
+src/
+├── app/          # Next.js app directory (pages and routing)
+├── components/   # Reusable React components
+└── styles/       # Global styles and SASS files
+
+public/          # Static assets
+certificates/    # SSL certificates for local HTTPS
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎯 Architecture Overview
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The project follows a modern React application architecture with Next.js:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **App Router**: Utilizes Next.js 15's app router for efficient page routing and server components
+- **Component-Based**: Modular architecture with reusable components
+- **Styling Solution**: Combines Mantine UI framework with custom SASS styles
+- **Type Safety**: Full TypeScript support throughout the application
+- **Development Tools**: Configured with ESLint for code quality
 
-## Learn More
+## 🚦 Getting Started
 
-To learn more about Next.js, take a look at the following resources:
+1. Install dependencies:
+```bash
+npm install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Run the development server:
+```bash
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. Build for production:
+```bash
+npm run build
+```
 
-## Deploy on Vercel
+4. Start production server:
+```bash
+npm start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🛠️ Development Features
+
+- Local HTTPS support with experimental Next.js features
+- TypeScript configuration for type safety
+- ESLint setup for code quality
+- Integration with Telegram Web App SDK
