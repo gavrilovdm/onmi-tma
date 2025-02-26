@@ -1,3 +1,5 @@
+'use client'
+
 import { StateCreator } from 'zustand';
 
 export interface Action {

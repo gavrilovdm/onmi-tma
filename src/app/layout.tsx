@@ -5,6 +5,7 @@ import { TelegramProvider } from '@/components/providers/telegram-provider';
 import { MantineProvider } from '@/components/providers/mantine-provider';
 import { RoutePreloader } from '@/components/providers/route-preloader';
 import { Viewport } from 'next';
+import { StoreProvider } from '@/providers/store-provider';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -29,12 +30,14 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body suppressHydrationWarning className='main-container'>
-        <TelegramProvider>
-          <MantineProvider>
-            <RoutePreloader />
-            {children}
-          </MantineProvider>
-        </TelegramProvider>
+        <StoreProvider>
+          <TelegramProvider>
+            <MantineProvider>
+              <RoutePreloader />
+              {children}
+            </MantineProvider>
+          </TelegramProvider>
+        </StoreProvider>
       </body>
     </html>
   );
