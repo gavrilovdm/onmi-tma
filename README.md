@@ -1,6 +1,18 @@
 # React App
 
-Web application built with Next.js and React in purposes of testing Telegram Web App SDK.
+Web application built with Next.js, React and Telegram Web App SDK.
+
+[Check in browser](https://onmi-tma-beige.vercel.app/)
+
+[Check in Telegram](https://t.me/onmi_test_bot/app)
+
+## 📱 Telegram Preview
+
+| Main Screen | Customize Panel | Lottery Screen |
+|:---:|:---:|:---:|
+| ![Profile Screen](public/preview/main_screen.png) | ![Customize Panel](public/preview/customize_screen.png) | ![Lottery Screen](public/preview/wheel_screen.png) |
+
+
 
 ## 🚀 Technologies Used
 
