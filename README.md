@@ -10,7 +10,7 @@ Web application built with Next.js, React and Telegram Web App SDK.
 
 | Main Screen | Customize Panel | Lottery Screen |
 |:---:|:---:|:---:|
-| ![Profile Screen](public/preview/main_screen.png) | ![Customize Panel](public/preview/customize_screen.png) | ![Lottery Screen](public/preview/wheel_screen.png) |
+| <img src="public/preview/main_screen.png" width="100%" height="410"   alt="Profile Screen"> | <img src="public/preview/customize_screen.png" width="100%" height="410" alt="Customize Panel"> | <img src="public/preview/wheel_screen.png" width="100%" height="410" alt="Lottery Screen"> |
 
 
 
